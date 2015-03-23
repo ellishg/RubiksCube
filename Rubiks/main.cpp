@@ -6,13 +6,45 @@
 //  Copyright (c) 2014 Ellis Sparky Hoag. All rights reserved.
 //
 
-#include <iostream>
+#include "World.h"
+
+World::World()  {
+    
+    isRunning = true;
+    
+    windowWidth = 300;
+    
+    windowHeight = 300;
+    
+    faceIsRotating = false;
+    
+    rubiksCubeIsShuffling = false;
+}
 
 int main(int argc, const char * argv[])
 {
-
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    
+    srand((unsigned int)time(nullptr));
+    
+    World world;
+    
+    if (!world.initSDLWindowAndContext()) {
+        return -1;
+    }
+    
+    world.initGL();
+    
+    //Uint32 ticks = SDL_GetTicks();
+    
+    while (world.isRunning) {
+        
+        world.OnEvent();
+        
+        world.OnLoop();
+        
+        world.OnRender();
+    }
+    
     return 0;
 }
 

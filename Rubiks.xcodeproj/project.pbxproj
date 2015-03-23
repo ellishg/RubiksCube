@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		E7A6D95D19904A6E00464E3D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E7A6D95C19904A6E00464E3D /* main.cpp */; };
 		E7A6D95F19904A6E00464E3D /* Rubiks.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = E7A6D95E19904A6E00464E3D /* Rubiks.1 */; };
+		E7A6D96619904A8A00464E3D /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A6D96519904A8A00464E3D /* OpenGL.framework */; };
+		E7A6D96819904AA500464E3D /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A6D96719904AA500464E3D /* SDL2.framework */; };
+		E7A6D96D1990512C00464E3D /* OnEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E7A6D96C1990512C00464E3D /* OnEvent.cpp */; };
+		E7A6D96F1990513700464E3D /* OnLoop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E7A6D96E1990513700464E3D /* OnLoop.cpp */; };
+		E7A6D9711990514100464E3D /* OnRender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E7A6D9701990514100464E3D /* OnRender.cpp */; };
+		E7A6D9731990515900464E3D /* OnInit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E7A6D9721990515900464E3D /* OnInit.cpp */; };
+		E7A6D9751990516000464E3D /* OnCleanup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E7A6D9741990516000464E3D /* OnCleanup.cpp */; };
+		E7A6D9791990695200464E3D /* Rubiks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E7A6D9771990695200464E3D /* Rubiks.cpp */; };
+		E7F67A491A49FFCB00F9BC75 /* solver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E7F67A481A49FFCB00F9BC75 /* solver.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +37,18 @@
 		E7A6D95919904A6E00464E3D /* Rubiks */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Rubiks; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7A6D95C19904A6E00464E3D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E7A6D95E19904A6E00464E3D /* Rubiks.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Rubiks.1; sourceTree = "<group>"; };
+		E7A6D96519904A8A00464E3D /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		E7A6D96719904AA500464E3D /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		E7A6D96A19904B7A00464E3D /* World.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = World.h; sourceTree = "<group>"; };
+		E7A6D96C1990512C00464E3D /* OnEvent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OnEvent.cpp; sourceTree = "<group>"; };
+		E7A6D96E1990513700464E3D /* OnLoop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OnLoop.cpp; sourceTree = "<group>"; };
+		E7A6D9701990514100464E3D /* OnRender.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OnRender.cpp; sourceTree = "<group>"; };
+		E7A6D9721990515900464E3D /* OnInit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OnInit.cpp; sourceTree = "<group>"; };
+		E7A6D9741990516000464E3D /* OnCleanup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OnCleanup.cpp; sourceTree = "<group>"; };
+		E7A6D97619905F6D00464E3D /* Definitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Definitions.h; sourceTree = "<group>"; };
+		E7A6D9771990695200464E3D /* Rubiks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rubiks.cpp; sourceTree = "<group>"; };
+		E7A6D9781990695200464E3D /* Rubiks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rubiks.h; sourceTree = "<group>"; };
+		E7F67A481A49FFCB00F9BC75 /* solver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = solver.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +56,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7A6D96819904AA500464E3D /* SDL2.framework in Frameworks */,
+				E7A6D96619904A8A00464E3D /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +67,8 @@
 		E7A6D95019904A6E00464E3D = {
 			isa = PBXGroup;
 			children = (
+				E7A6D96719904AA500464E3D /* SDL2.framework */,
+				E7A6D96519904A8A00464E3D /* OpenGL.framework */,
 				E7A6D95B19904A6E00464E3D /* Rubiks */,
 				E7A6D95A19904A6E00464E3D /* Products */,
 			);
@@ -61,6 +86,16 @@
 			isa = PBXGroup;
 			children = (
 				E7A6D95C19904A6E00464E3D /* main.cpp */,
+				E7F67A481A49FFCB00F9BC75 /* solver.cpp */,
+				E7A6D9771990695200464E3D /* Rubiks.cpp */,
+				E7A6D9781990695200464E3D /* Rubiks.h */,
+				E7A6D96C1990512C00464E3D /* OnEvent.cpp */,
+				E7A6D9721990515900464E3D /* OnInit.cpp */,
+				E7A6D9741990516000464E3D /* OnCleanup.cpp */,
+				E7A6D96E1990513700464E3D /* OnLoop.cpp */,
+				E7A6D9701990514100464E3D /* OnRender.cpp */,
+				E7A6D97619905F6D00464E3D /* Definitions.h */,
+				E7A6D96A19904B7A00464E3D /* World.h */,
 				E7A6D95E19904A6E00464E3D /* Rubiks.1 */,
 			);
 			path = Rubiks;
@@ -117,7 +152,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7A6D9791990695200464E3D /* Rubiks.cpp in Sources */,
+				E7A6D96F1990513700464E3D /* OnLoop.cpp in Sources */,
 				E7A6D95D19904A6E00464E3D /* main.cpp in Sources */,
+				E7A6D9711990514100464E3D /* OnRender.cpp in Sources */,
+				E7A6D9751990516000464E3D /* OnCleanup.cpp in Sources */,
+				E7A6D9731990515900464E3D /* OnInit.cpp in Sources */,
+				E7F67A491A49FFCB00F9BC75 /* solver.cpp in Sources */,
+				E7A6D96D1990512C00464E3D /* OnEvent.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +239,10 @@
 		E7A6D96319904A6E00464E3D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -204,6 +250,10 @@
 		E7A6D96419904A6E00464E3D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -227,6 +277,7 @@
 				E7A6D96419904A6E00464E3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
