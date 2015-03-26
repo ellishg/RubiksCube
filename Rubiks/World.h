@@ -36,7 +36,9 @@ class World {
     
     RUBIKS_CUBE_FACE faceToRotate;
     
-    void rotateFace(RUBIKS_CUBE_FACE FACE);
+    RUBIKS_CUBE_MOVE_DIRECTION directionToRotate;
+    
+    void rotateFace(RUBIKS_CUBE_FACE FACE, RUBIKS_CUBE_MOVE_DIRECTION direction);
     
     bool faceIsRotating;
     

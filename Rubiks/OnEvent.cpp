@@ -35,22 +35,22 @@ void World::OnKeyDown(SDL_Keycode sym)   {
             isRunning = false;
             break;
         case SDLK_0:
-            rotateFace(TOP);
+            rotateFace(TOP, CLOCKWISE);
             break;
         case SDLK_1:
-            rotateFace(FRONT);
+            rotateFace(FRONT, CLOCKWISE);
             break;
         case SDLK_2:
-            rotateFace(RIGHT);
+            rotateFace(RIGHT, CLOCKWISE);
             break;
         case SDLK_3:
-            rotateFace(BACK);
+            rotateFace(BACK, CLOCKWISE);
             break;
         case SDLK_4:
-            rotateFace(LEFT);
+            rotateFace(LEFT, CLOCKWISE);
             break;
         case SDLK_5:
-            rotateFace(BOTTOM);
+            rotateFace(BOTTOM, CLOCKWISE);
             break;
         case SDLK_UP:
             rubiks.x_rot += rotInc;
@@ -66,6 +66,11 @@ void World::OnKeyDown(SDL_Keycode sym)   {
             break;
         case SDLK_m:
             rubiksCubeIsShuffling = true;
+            break;
+        case SDLK_s:
+            if (!faceIsRotating) {
+                rubiks.solveCube();
+            }
             break;
         default:
             break;

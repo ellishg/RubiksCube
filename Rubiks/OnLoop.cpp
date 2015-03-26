@@ -31,13 +31,34 @@ void World::OnLoop()    {
         }
     }*/
     
+    if (rubiks.solvingCube && !faceIsRotating) {
+        //We need to iterate through the movesStack
+        if (!rubiks.movesStack.empty()) {
+            rotateFace(rubiks.movesStack.back().face, rubiks.movesStack.back().direction);
+            rubiks.movesStack.pop_back();
+        }
+        else    {
+            rubiks.solvingCube = false;
+        }
+    }
+    
     if (rubiksCubeIsShuffling && !faceIsRotating) {
         
         static int rotations = 0;
         
-        rotateFace((RUBIKS_CUBE_FACE)(rand() % 6));
+        static int lastFaceRotated = -1;
         
-        if (rotations++ >= 60) {
+        RUBIKS_CUBE_FACE face = (RUBIKS_CUBE_FACE)(rand() % 6);
+        
+        while (face == lastFaceRotated) {
+            face = (RUBIKS_CUBE_FACE)(rand() % 6);
+        }
+        
+        lastFaceRotated = face;
+        
+        rotateFace(face, (RUBIKS_CUBE_MOVE_DIRECTION)((rand() % 3) + 1));
+        
+        if (rotations++ >= 40) {
             rubiksCubeIsShuffling = false;
             rotations = 0;
         }
@@ -45,11 +66,11 @@ void World::OnLoop()    {
     
     if ((SDL_GetTicks() - startRotateTime > TURN_TIME) && faceIsRotating) {
         faceIsRotating = false;
-        rubiks.moveRubiksCube(faceToRotate, CLOCKWISE);
+        rubiks.moveRubiksCube(faceToRotate, directionToRotate, rubiks.cubeState);
     }
 }
 
-void World::rotateFace(RUBIKS_CUBE_FACE FACE) {
+void World::rotateFace(RUBIKS_CUBE_FACE FACE, RUBIKS_CUBE_MOVE_DIRECTION direction) {
     
     if (!faceIsRotating) {
         faceIsRotating = true;
@@ -57,5 +78,7 @@ void World::rotateFace(RUBIKS_CUBE_FACE FACE) {
         startRotateTime = SDL_GetTicks();
         
         faceToRotate = FACE;
+        
+        directionToRotate = direction;
     }
 }

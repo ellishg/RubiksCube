@@ -17,6 +17,9 @@ Rubiks::Rubiks()    {
     y_rot = -45;
     
     z_rot = 0;
+    
+    
+    solvingCube = false;
 }
 
 bool Rubiks::cubieIsInFace(int cubie, RUBIKS_CUBE_FACE FACE, int * x, int * y, int * z)    {
@@ -64,7 +67,7 @@ bool Rubiks::cubieIsInFace(int cubie, RUBIKS_CUBE_FACE FACE, int * x, int * y, i
     }
 }
 
-void Rubiks::moveRubiksCube(RUBIKS_CUBE_FACE FACE, RUBIKS_CUBE_MOVE_DIRECTION DIRECTION)    {
+void Rubiks::moveRubiksCube(RUBIKS_CUBE_FACE FACE, RUBIKS_CUBE_MOVE_DIRECTION DIRECTION, uint32_t * cState)    {
     
     for (int i = 0; i < DIRECTION; i++) {
         /*
@@ -75,11 +78,11 @@ void Rubiks::moveRubiksCube(RUBIKS_CUBE_FACE FACE, RUBIKS_CUBE_MOVE_DIRECTION DI
         
         //first, move the face clockwise
         
-        cubeState[FACE] = moveFaceClockwise(cubeState[FACE]);
+        cState[FACE] = moveFaceClockwise(cState[FACE]);
         
         //then, move the strip around the face clockwise
         
-        switchRow(cubeState, FACE);
+        switchRow(cState, FACE);
         
     }
     
@@ -91,109 +94,109 @@ void Rubiks::moveRubiksCube(RUBIKS_CUBE_FACE FACE, RUBIKS_CUBE_MOVE_DIRECTION DI
     std::cout << "\n";*/
 }
 
-void Rubiks::switchRow(uint32_t * cubeState, RUBIKS_CUBE_FACE FACE)  {
+void Rubiks::switchRow(uint32_t * cState, RUBIKS_CUBE_FACE FACE)  {
     
     switch (FACE) {
         case TOP:
-            switchSquaresDifferentFace(FRONT, 0, LEFT, 2);
-            switchSquaresDifferentFace(FRONT, 1, LEFT, 5);
-            switchSquaresDifferentFace(FRONT, 2, LEFT, 8);
+            switchSquaresDifferentFace(FRONT, 0, LEFT, 2, cState);
+            switchSquaresDifferentFace(FRONT, 1, LEFT, 5, cState);
+            switchSquaresDifferentFace(FRONT, 2, LEFT, 8, cState);
             
-            switchSquaresDifferentFace(RIGHT, 6, FRONT, 0);
-            switchSquaresDifferentFace(RIGHT, 3, FRONT, 1);
-            switchSquaresDifferentFace(RIGHT, 0, FRONT, 2);
+            switchSquaresDifferentFace(RIGHT, 6, FRONT, 0, cState);
+            switchSquaresDifferentFace(RIGHT, 3, FRONT, 1, cState);
+            switchSquaresDifferentFace(RIGHT, 0, FRONT, 2, cState);
 
-            switchSquaresDifferentFace(BACK, 8, RIGHT, 6);
-            switchSquaresDifferentFace(BACK, 7, RIGHT, 3);
-            switchSquaresDifferentFace(BACK, 6, RIGHT, 0);
+            switchSquaresDifferentFace(BACK, 8, RIGHT, 6, cState);
+            switchSquaresDifferentFace(BACK, 7, RIGHT, 3, cState);
+            switchSquaresDifferentFace(BACK, 6, RIGHT, 0, cState);
             break;
         case FRONT:
-            switchSquaresDifferentFace(BOTTOM, 0, LEFT, 8);
-            switchSquaresDifferentFace(BOTTOM, 1, LEFT, 7);
-            switchSquaresDifferentFace(BOTTOM, 2, LEFT, 6);
+            switchSquaresDifferentFace(BOTTOM, 0, LEFT, 8, cState);
+            switchSquaresDifferentFace(BOTTOM, 1, LEFT, 7, cState);
+            switchSquaresDifferentFace(BOTTOM, 2, LEFT, 6, cState);
             
-            switchSquaresDifferentFace(RIGHT, 8, BOTTOM, 0);
-            switchSquaresDifferentFace(RIGHT, 7, BOTTOM, 1);
-            switchSquaresDifferentFace(RIGHT, 6, BOTTOM, 2);
+            switchSquaresDifferentFace(RIGHT, 8, BOTTOM, 0, cState);
+            switchSquaresDifferentFace(RIGHT, 7, BOTTOM, 1, cState);
+            switchSquaresDifferentFace(RIGHT, 6, BOTTOM, 2, cState);
             
-            switchSquaresDifferentFace(TOP, 8, RIGHT, 8);
-            switchSquaresDifferentFace(TOP, 7, RIGHT, 7);
-            switchSquaresDifferentFace(TOP, 6, RIGHT, 6);
+            switchSquaresDifferentFace(TOP, 8, RIGHT, 8, cState);
+            switchSquaresDifferentFace(TOP, 7, RIGHT, 7, cState);
+            switchSquaresDifferentFace(TOP, 6, RIGHT, 6, cState);
             break;
         case RIGHT:
-            switchSquaresDifferentFace(FRONT, 2, TOP, 2);
-            switchSquaresDifferentFace(FRONT, 5, TOP, 5);
-            switchSquaresDifferentFace(FRONT, 8, TOP, 8);
+            switchSquaresDifferentFace(FRONT, 2, TOP, 2, cState);
+            switchSquaresDifferentFace(FRONT, 5, TOP, 5, cState);
+            switchSquaresDifferentFace(FRONT, 8, TOP, 8, cState);
             
-            switchSquaresDifferentFace(BOTTOM, 2, FRONT, 2);
-            switchSquaresDifferentFace(BOTTOM, 5, FRONT, 5);
-            switchSquaresDifferentFace(BOTTOM, 8, FRONT, 8);
+            switchSquaresDifferentFace(BOTTOM, 2, FRONT, 2, cState);
+            switchSquaresDifferentFace(BOTTOM, 5, FRONT, 5, cState);
+            switchSquaresDifferentFace(BOTTOM, 8, FRONT, 8, cState);
             
-            switchSquaresDifferentFace(BACK, 2, BOTTOM, 2);
-            switchSquaresDifferentFace(BACK, 5, BOTTOM, 5);
-            switchSquaresDifferentFace(BACK, 8, BOTTOM, 8);
+            switchSquaresDifferentFace(BACK, 2, BOTTOM, 2, cState);
+            switchSquaresDifferentFace(BACK, 5, BOTTOM, 5, cState);
+            switchSquaresDifferentFace(BACK, 8, BOTTOM, 8, cState);
             break;
         case BACK:
-            switchSquaresDifferentFace(TOP, 0, LEFT, 0);
-            switchSquaresDifferentFace(TOP, 1, LEFT, 1);
-            switchSquaresDifferentFace(TOP, 2, LEFT, 2);
+            switchSquaresDifferentFace(TOP, 0, LEFT, 0, cState);
+            switchSquaresDifferentFace(TOP, 1, LEFT, 1, cState);
+            switchSquaresDifferentFace(TOP, 2, LEFT, 2, cState);
             
-            switchSquaresDifferentFace(RIGHT, 0, TOP, 0);
-            switchSquaresDifferentFace(RIGHT, 1, TOP, 1);
-            switchSquaresDifferentFace(RIGHT, 2, TOP, 2);
+            switchSquaresDifferentFace(RIGHT, 0, TOP, 0, cState);
+            switchSquaresDifferentFace(RIGHT, 1, TOP, 1, cState);
+            switchSquaresDifferentFace(RIGHT, 2, TOP, 2, cState);
             
-            switchSquaresDifferentFace(BOTTOM, 8, RIGHT, 0);
-            switchSquaresDifferentFace(BOTTOM, 7, RIGHT, 1);
-            switchSquaresDifferentFace(BOTTOM, 6, RIGHT, 2);
+            switchSquaresDifferentFace(BOTTOM, 8, RIGHT, 0, cState);
+            switchSquaresDifferentFace(BOTTOM, 7, RIGHT, 1, cState);
+            switchSquaresDifferentFace(BOTTOM, 6, RIGHT, 2, cState);
             break;
         case LEFT:
-            switchSquaresDifferentFace(FRONT, 0, BOTTOM, 0);
-            switchSquaresDifferentFace(FRONT, 3, BOTTOM, 3);
-            switchSquaresDifferentFace(FRONT, 6, BOTTOM, 6);
+            switchSquaresDifferentFace(FRONT, 0, BOTTOM, 0, cState);
+            switchSquaresDifferentFace(FRONT, 3, BOTTOM, 3, cState);
+            switchSquaresDifferentFace(FRONT, 6, BOTTOM, 6, cState);
             
-            switchSquaresDifferentFace(TOP, 0, FRONT, 0);
-            switchSquaresDifferentFace(TOP, 3, FRONT, 3);
-            switchSquaresDifferentFace(TOP, 6, FRONT, 6);
+            switchSquaresDifferentFace(TOP, 0, FRONT, 0, cState);
+            switchSquaresDifferentFace(TOP, 3, FRONT, 3, cState);
+            switchSquaresDifferentFace(TOP, 6, FRONT, 6, cState);
             
-            switchSquaresDifferentFace(BACK, 0, TOP, 0);
-            switchSquaresDifferentFace(BACK, 3, TOP, 3);
-            switchSquaresDifferentFace(BACK, 6, TOP, 6);
+            switchSquaresDifferentFace(BACK, 0, TOP, 0, cState);
+            switchSquaresDifferentFace(BACK, 3, TOP, 3, cState);
+            switchSquaresDifferentFace(BACK, 6, TOP, 6, cState);
             break;
         case BOTTOM:
-            switchSquaresDifferentFace(BACK, 0, LEFT, 6);
-            switchSquaresDifferentFace(BACK, 1, LEFT, 3);
-            switchSquaresDifferentFace(BACK, 2, LEFT, 0);
+            switchSquaresDifferentFace(BACK, 0, LEFT, 6, cState);
+            switchSquaresDifferentFace(BACK, 1, LEFT, 3, cState);
+            switchSquaresDifferentFace(BACK, 2, LEFT, 0, cState);
             
-            switchSquaresDifferentFace(RIGHT, 2, BACK, 0);
-            switchSquaresDifferentFace(RIGHT, 5, BACK, 1);
-            switchSquaresDifferentFace(RIGHT, 8, BACK, 2);
+            switchSquaresDifferentFace(RIGHT, 2, BACK, 0, cState);
+            switchSquaresDifferentFace(RIGHT, 5, BACK, 1, cState);
+            switchSquaresDifferentFace(RIGHT, 8, BACK, 2, cState);
             
-            switchSquaresDifferentFace(FRONT, 8, RIGHT, 2);
-            switchSquaresDifferentFace(FRONT, 7, RIGHT, 5);
-            switchSquaresDifferentFace(FRONT, 6, RIGHT, 8);
+            switchSquaresDifferentFace(FRONT, 8, RIGHT, 2, cState);
+            switchSquaresDifferentFace(FRONT, 7, RIGHT, 5, cState);
+            switchSquaresDifferentFace(FRONT, 6, RIGHT, 8, cState);
             break;
         default:
             break;
     }
 }
 
-void Rubiks::switchSquaresDifferentFace(RUBIKS_CUBE_FACE FACE_A, int squareAIndex, RUBIKS_CUBE_FACE FACE_B, int squareBIndex)   {
+void Rubiks::switchSquaresDifferentFace(RUBIKS_CUBE_FACE FACE_A, int squareAIndex, RUBIKS_CUBE_FACE FACE_B, int squareBIndex, uint32_t * cState)   {
     
     uint32_t mask = 0b111;
     
-    uint32_t squareA = (cubeState[FACE_A] >> (squareAIndex * 3)) & mask;
+    uint32_t squareA = (cState[FACE_A] >> (squareAIndex * 3)) & mask;
     
-    uint32_t squareB = (cubeState[FACE_B] >> (squareBIndex * 3)) & mask;
+    uint32_t squareB = (cState[FACE_B] >> (squareBIndex * 3)) & mask;
     
     assert(squareA < 6 && squareB < 6);
     
-    cubeState[FACE_A] = cubeState[FACE_A] & ~(mask << (squareAIndex * 3));
+    cState[FACE_A] = cState[FACE_A] & ~(mask << (squareAIndex * 3));
     
-    cubeState[FACE_B] = cubeState[FACE_B] & ~(mask << (squareBIndex * 3));
+    cState[FACE_B] = cState[FACE_B] & ~(mask << (squareBIndex * 3));
     
-    cubeState[FACE_A] = cubeState[FACE_A] | (squareB << (squareAIndex * 3));
+    cState[FACE_A] = cState[FACE_A] | (squareB << (squareAIndex * 3));
     
-    cubeState[FACE_B] = cubeState[FACE_B] | (squareA << (squareBIndex * 3));
+    cState[FACE_B] = cState[FACE_B] | (squareA << (squareBIndex * 3));
 
 }
 
@@ -258,9 +261,9 @@ uint32_t * Rubiks::getRubiksCubeColorArray() {
 
 uint32_t * Rubiks::getSolvedCube()  {
     
-    static uint32_t tmpCubeState[6];
+    /*static uint32_t tmpCubeState[6];
     
-    tmpCubeState[TOP] = 0;    //white face
+    tmpCubeState[TOP] = 0;    //all white face
     
     for (int i = 8; i >=0; i--) {
         tmpCubeState[FRONT] += RED << (i * 3);
@@ -278,11 +281,7 @@ uint32_t * Rubiks::getSolvedCube()  {
         tmpCubeState[BOTTOM] += YELLOW << (i * 3);
     }
     
-    /*uint32_t red = 0b001;
     
-    tmpCubeState[LEFT] = tmpCubeState[LEFT] & ~(0b111 << 3 * 0);
-    
-    tmpCubeState[LEFT] = tmpCubeState[LEFT] | (red << 3 * 0);*/
-    
-    return tmpCubeState;
+    return tmpCubeState;*/
+    return makeCubeState(finalGoal);
 }

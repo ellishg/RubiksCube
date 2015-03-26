@@ -60,7 +60,7 @@ void World::OnRender()  {
     rubiksColorArray = rubiks.getRubiksCubeColorArray();
     
     for (int cubie = 0; cubie < 27; cubie++) {
-        if (cubie == 13) {
+        if (cubie == 13) {//center cube can be skipped
             continue;
         }
         
@@ -130,8 +130,26 @@ void World::OnRender()  {
         
             int x_rot, y_rot, z_rot;
             
+            int finalAngle;
+            int factor = 1;
+            
+            switch (directionToRotate) {
+                case CLOCKWISE:
+                    finalAngle = 90;
+                    break;
+                case HALF_TURN:
+                    finalAngle = 180;
+                    break;
+                case COUNTERCLOCKWISE:
+                    finalAngle = 90;
+                    factor = -1;
+                    break;
+                default:
+                    break;
+            }
+            
             if (rubiks.cubieIsInFace(cubie, faceToRotate, &x_rot, &y_rot, &z_rot)) {
-                glRotated(90 * (SDL_GetTicks() - startRotateTime) / (double)TURN_TIME, x_rot, y_rot, z_rot);
+                glRotated(finalAngle * (SDL_GetTicks() - startRotateTime) / (double)TURN_TIME, factor * x_rot, factor * y_rot, factor * z_rot);
             }
         }
         

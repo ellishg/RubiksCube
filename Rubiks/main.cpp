@@ -12,9 +12,9 @@ World::World()  {
     
     isRunning = true;
     
-    windowWidth = 300;
+    windowWidth = 400;
     
-    windowHeight = 300;
+    windowHeight = 400;
     
     faceIsRotating = false;
     

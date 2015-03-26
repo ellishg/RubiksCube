@@ -48,6 +48,7 @@
 		E7A6D97619905F6D00464E3D /* Definitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Definitions.h; sourceTree = "<group>"; };
 		E7A6D9771990695200464E3D /* Rubiks.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rubiks.cpp; sourceTree = "<group>"; };
 		E7A6D9781990695200464E3D /* Rubiks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rubiks.h; sourceTree = "<group>"; };
+		E7EE881D1AC3B41A000CC0D7 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		E7F67A481A49FFCB00F9BC75 /* solver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = solver.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +88,7 @@
 			children = (
 				E7A6D95C19904A6E00464E3D /* main.cpp */,
 				E7F67A481A49FFCB00F9BC75 /* solver.cpp */,
+				E7EE881D1AC3B41A000CC0D7 /* README.txt */,
 				E7A6D9771990695200464E3D /* Rubiks.cpp */,
 				E7A6D9781990695200464E3D /* Rubiks.h */,
 				E7A6D96C1990512C00464E3D /* OnEvent.cpp */,
