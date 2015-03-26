@@ -45,12 +45,15 @@ void Rubiks::solveCube()    {
         tmpCubeState[i] = cubeState[i];
     }
     
+    //LOOK HERE IF YOU WANT TO ADJUST THE LIMITS OF THE SOLVER!!!!!!
+    
     //Lets iterate through our goals
     //A full solution takes way to long right now
-    //iterating i to NUM_GOALS will solve the whole cube
-    //              4 will solve the first layer
-    //              8 will solve first and second layers
-    //              12 will solve courners
+    //Iterating i to NUM_GOALS will solve the whole cube
+    //               4 will solve the first layer
+    //               8 will solve first and second layers
+    //               12 will solve courners
+    //               14 finishes up the rest
     for (int i = 0; i < 4; i++) {
         const uint8_t * currentGoal = layerGoals[i];
         //const uint8_t * currentGoal = ortegaGoal[i];
@@ -74,7 +77,7 @@ void Rubiks::solveCube()    {
             
             result = accomplishGoal(tmpCubeState, cubeStateGoal, steps, tmpMovesStack, -1);
             
-            printf("%i, ", steps);
+            //printf("%i, ", steps);
         }
         
         t = clock() - t;
