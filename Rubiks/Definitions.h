@@ -11,7 +11,8 @@
 
 #define CUBIE_SEPARATION 1.05f
 #define BLACK 0.0f
-#define TURN_TIME 75
+#define TURN_TIME 300
+#define FAST_TURN_TIME 100
 #define GODS_NUMBER 20
 
 
@@ -20,6 +21,21 @@
     EDGE,   //12 edges
     CORNER  //eight corners
 };*/
+
+enum RUBIKS_CUBE_FACE {
+    TOP = 0,
+    FRONT = 1,
+    RIGHT = 2,
+    BACK = 3,
+    LEFT = 4,
+    BOTTOM = 5
+};
+
+enum RUBIKS_CUBE_MOVE_DIRECTION {
+    CLOCKWISE = 1,
+    HALF_TURN = 2,
+    COUNTERCLOCKWISE = 3
+};
 
 enum RUBIKS_CUBIE_COLORS    {
     WHITE = 0b000,
@@ -677,6 +693,60 @@ static const uint8_t finalGoal[6 * 9] = {
     YELLOW, YELLOW, YELLOW
 };
 
+static uint8_t yellowCrossGoal[6 * 9] = {
+    
+    WHITE, WHITE, WHITE,
+    WHITE, WHITE, WHITE,
+    WHITE, WHITE, WHITE,
+    
+    RED, RED, RED,
+    RED, RED, RED,
+    WILDCARD, WILDCARD, WILDCARD,
+    
+    BLUE, BLUE, WILDCARD,
+    BLUE, BLUE, WILDCARD,
+    BLUE, BLUE, WILDCARD,
+    
+    WILDCARD, WILDCARD, WILDCARD,
+    ORANGE, ORANGE, ORANGE,
+    ORANGE, ORANGE, ORANGE,
+    
+    WILDCARD, GREEN, GREEN,
+    WILDCARD, GREEN, GREEN,
+    WILDCARD, GREEN, GREEN,
+    
+    WILDCARD, YELLOW, WILDCARD,
+    YELLOW, YELLOW, YELLOW,
+    WILDCARD, YELLOW, WILDCARD
+};
+
+static const uint8_t orientatedCornersGoal[6 * 9] = {
+    
+    WHITE, WHITE, WHITE,
+    WHITE, WHITE, WHITE,
+    WHITE, WHITE, WHITE,
+    
+    RED, RED, RED,
+    RED, RED, RED,
+    RED, WILDCARD, RED,
+    
+    BLUE, BLUE, BLUE,
+    BLUE, BLUE, WILDCARD,
+    BLUE, BLUE, BLUE,
+    
+    ORANGE, WILDCARD, ORANGE,
+    ORANGE, ORANGE, ORANGE,
+    ORANGE, ORANGE, ORANGE,
+    
+    GREEN, GREEN, GREEN,
+    WILDCARD, GREEN, GREEN,
+    GREEN, GREEN, GREEN,
+    
+    YELLOW, YELLOW, YELLOW,
+    YELLOW, YELLOW, YELLOW,
+    YELLOW, YELLOW, YELLOW
+};
+
 #define NUM_LAYER_GOALS 14
 
 static const uint8_t * layerGoals[NUM_LAYER_GOALS] {
@@ -755,5 +825,96 @@ static const uint8_t * ortegaGoal[NUM_ORTEGA_METHOD_GOALS]    {
     allCornersGoal
 };
 
+static const int secondLayerRightHandMove[7 * 2]  {
+    
+    /*
+     *  Lets assume we are doing a right-handed move
+     *  to place an edge and we are looking at the front (red)
+     *  FACE, DIRECTION
+     */
+    
+    FRONT, CLOCKWISE,
+    BOTTOM, CLOCKWISE,
+    FRONT, COUNTERCLOCKWISE,
+    BOTTOM, COUNTERCLOCKWISE,
+    RIGHT, COUNTERCLOCKWISE,
+    BOTTOM, COUNTERCLOCKWISE,
+    RIGHT, CLOCKWISE
+};
+
+static const int yellowCrossMove[6 * 2]  {
+    
+    FRONT, CLOCKWISE,
+    BOTTOM, CLOCKWISE,
+    LEFT, CLOCKWISE,
+    BOTTOM, COUNTERCLOCKWISE,
+    LEFT, COUNTERCLOCKWISE,
+    FRONT, COUNTERCLOCKWISE
+};
+
+static const int switchRightCorners[8 * 2] {
+    
+    /*
+     *  Switches two side corners on the right side
+     */
+    
+    LEFT, CLOCKWISE,
+    BOTTOM, COUNTERCLOCKWISE,
+    RIGHT, COUNTERCLOCKWISE,
+    BOTTOM, CLOCKWISE,
+    LEFT, COUNTERCLOCKWISE,
+    BOTTOM, COUNTERCLOCKWISE,
+    RIGHT, CLOCKWISE,
+};
+
+static const int orientateCornersRightHand[8 * 2] {
+    
+    RIGHT, COUNTERCLOCKWISE,
+    BOTTOM, COUNTERCLOCKWISE,
+    RIGHT, CLOCKWISE,
+    BOTTOM, COUNTERCLOCKWISE,
+    RIGHT, COUNTERCLOCKWISE,
+    BOTTOM, HALF_TURN,
+    RIGHT, CLOCKWISE,
+    BOTTOM, HALF_TURN
+};
+
+static const int orientateCornersLeftHand[8 * 2] {
+    
+    LEFT, CLOCKWISE,
+    BOTTOM, CLOCKWISE,
+    LEFT, COUNTERCLOCKWISE,
+    BOTTOM, CLOCKWISE,
+    LEFT, CLOCKWISE,
+    BOTTOM, HALF_TURN,
+    LEFT, COUNTERCLOCKWISE,
+    BOTTOM, HALF_TURN
+};
+
+static const int orientateEdgesA[9 * 2]  {
+    
+    LEFT, HALF_TURN,
+    BOTTOM, CLOCKWISE,
+    FRONT, CLOCKWISE,
+    BACK, COUNTERCLOCKWISE,
+    LEFT, HALF_TURN,
+    FRONT, COUNTERCLOCKWISE,
+    BACK, CLOCKWISE,
+    BOTTOM, CLOCKWISE,
+    LEFT, HALF_TURN
+};
+
+static const int orientateEdgesB[9 * 2]  {
+    
+    LEFT, HALF_TURN,
+    BOTTOM, COUNTERCLOCKWISE,
+    FRONT, CLOCKWISE,
+    BACK, COUNTERCLOCKWISE,
+    LEFT, HALF_TURN,
+    FRONT, COUNTERCLOCKWISE,
+    BACK, CLOCKWISE,
+    BOTTOM, COUNTERCLOCKWISE,
+    LEFT, HALF_TURN
+};
 
 #endif

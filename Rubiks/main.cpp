@@ -12,11 +12,13 @@ World::World()  {
     
     isRunning = true;
     
-    windowWidth = 400;
+    windowWidth = 600;
     
-    windowHeight = 400;
+    windowHeight = 600;
     
     faceIsRotating = false;
+    
+    rotationTime = TURN_TIME;
     
     rubiksCubeIsShuffling = false;
 }

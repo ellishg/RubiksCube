@@ -149,7 +149,7 @@ void World::OnRender()  {
             }
             
             if (rubiks.cubieIsInFace(cubie, faceToRotate, &x_rot, &y_rot, &z_rot)) {
-                glRotated(finalAngle * (SDL_GetTicks() - startRotateTime) / (double)TURN_TIME, factor * x_rot, factor * y_rot, factor * z_rot);
+                glRotated(finalAngle * (SDL_GetTicks() - startRotateTime) / (double)rotationTime, factor * x_rot, factor * y_rot, factor * z_rot);
             }
         }
         

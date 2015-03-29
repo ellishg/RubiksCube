@@ -42,6 +42,8 @@ class World {
     
     bool faceIsRotating;
     
+    int rotationTime;
+    
     bool rubiksCubeIsShuffling;
     
 public:

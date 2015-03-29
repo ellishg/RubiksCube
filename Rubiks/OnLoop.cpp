@@ -61,10 +61,11 @@ void World::OnLoop()    {
         if (rotations++ >= 40) {
             rubiksCubeIsShuffling = false;
             rotations = 0;
+            rotationTime = TURN_TIME;
         }
     }
     
-    if ((SDL_GetTicks() - startRotateTime > TURN_TIME) && faceIsRotating) {
+    if ((SDL_GetTicks() - startRotateTime > rotationTime) && faceIsRotating) {
         faceIsRotating = false;
         rubiks.moveRubiksCube(faceToRotate, directionToRotate, rubiks.cubeState);
     }

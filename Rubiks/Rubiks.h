@@ -27,21 +27,6 @@
  */
 
 
-enum RUBIKS_CUBE_FACE {
-    TOP = 0,
-    FRONT = 1,
-    RIGHT = 2,
-    BACK = 3,
-    LEFT = 4,
-    BOTTOM = 5
-};
-
-enum RUBIKS_CUBE_MOVE_DIRECTION {
-    CLOCKWISE = 1,
-    HALF_TURN = 2,
-    COUNTERCLOCKWISE = 3
-};
-
 struct moveAndDirection {
     RUBIKS_CUBE_FACE face;
     RUBIKS_CUBE_MOVE_DIRECTION direction;
@@ -82,11 +67,13 @@ public:
     
     uint32_t * makeCubeState(const uint8_t * goal);
     
-    bool accomplishGoal(uint32_t * location, uint32_t * destination, int steps, std::list<moveAndDirection> & moves, int lastMovedFace);
+    bool accomplishGoal(uint32_t * location, uint32_t * destination, int steps, std::list<moveAndDirection> & moves, int lastMovedFace, bool useCornerAlgorithm, bool useEdgesAlgorithm);
     
     bool cubeStatesAreEqual(uint32_t * location, uint32_t * destination);
     
-    bool placeEdge(uint32_t * cState, RUBIKS_CUBE_FACE face, bool rightHand, std::list<moveAndDirection> & moves);
+    bool placeEdge(uint32_t * cState, RUBIKS_CUBE_FACE face, std::list<moveAndDirection> & moves, bool override);
+    
+    bool permutateCorners(uint32_t * cState, std::list<moveAndDirection> & moves);
 };
 
 #endif /* defined(__Rubiks__Rubiks__) */

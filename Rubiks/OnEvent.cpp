@@ -66,6 +66,7 @@ void World::OnKeyDown(SDL_Keycode sym)   {
             break;
         case SDLK_m:
             rubiksCubeIsShuffling = true;
+            rotationTime = FAST_TURN_TIME;
             break;
         case SDLK_s:
             if (!faceIsRotating) {
