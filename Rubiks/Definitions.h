@@ -9,7 +9,7 @@
 #ifndef Rubiks_Definitions_h
 #define Rubiks_Definitions_h
 
-#define CUBIE_SEPARATION 1.05f
+#define CUBIE_SEPARATION 1.055f
 #define BLACK 0.0f
 #define TURN_TIME 300
 #define FAST_TURN_TIME 100

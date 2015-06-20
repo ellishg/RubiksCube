@@ -15,16 +15,16 @@ void World::OnLoop()    {
     if (!faceIsRotating) {
         switch (x++ % 4) {
             case 0:
-                rotateFace(FRONT);
+                rotateFace(FRONT, CLOCKWISE);
                 break;
             case 1:
-                rotateFace(RIGHT);
+                rotateFace(RIGHT, CLOCKWISE);
                 break;
             case 2:
-                rotateFace(BACK);
+                rotateFace(BACK, CLOCKWISE);
                 break;
             case 3:
-                rotateFace(LEFT);
+                rotateFace(LEFT, CLOCKWISE);
                 break;
             default:
                 break;

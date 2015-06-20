@@ -18,7 +18,6 @@ Rubiks::Rubiks()    {
     
     z_rot = 0;
     
-    
     solvingCube = false;
 }
 
@@ -85,13 +84,6 @@ void Rubiks::moveRubiksCube(RUBIKS_CUBE_FACE FACE, RUBIKS_CUBE_MOVE_DIRECTION DI
         switchRow(cState, FACE);
         
     }
-    
-    /*uint32_t mask = 0b111;
-    
-    for (int i = 8; i >= 0; i--) {
-        std::cout << ((cubeState[LEFT] >> i * 3) & mask) << ", ";
-    }
-    std::cout << "\n";*/
 }
 
 void Rubiks::switchRow(uint32_t * cState, RUBIKS_CUBE_FACE FACE)  {

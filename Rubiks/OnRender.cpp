@@ -12,39 +12,6 @@ void World::OnRender()  {
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    //static double x = 0;
-    
-//
-//    glLoadIdentity();
-//    
-//    glTranslated(0, sin(x/1000), -20);
-//    
-//    glScaled(.5, .5, 1);
-//    
-//    glRotated(x++, 1, 1, 1);
-//    
-//    glColor3d(1, 1, 0);
-//    
-//    glEnableClientState(GL_VERTEX_ARRAY);
-//    //glEnableClientState(GL_COLOR_ARRAY);
-//    
-//    GLfloat colors[72];
-//    
-//    for (int i = 0; i < 72; i++) {
-//        colors[i] = (int)(i / 24);
-//    }
-//    
-//    glVertexPointer(3, GL_FLOAT, 0, cubieVertices);
-//    //glColorPointer(3, GL_FLOAT, 0, colors);
-//    
-//    //glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, cubieIndices);
-//    glDrawArrays(GL_QUADS, 0, 24);
-//    
-//    glDisableClientState(GL_VERTEX_ARRAY);
-//    //glDisableClientState(GL_COLOR_ARRAY);
-//    
-    
-    
     glLoadIdentity();
     
     glTranslated(0, 0, -28);
@@ -65,10 +32,6 @@ void World::OnRender()  {
         }
         
         GLfloat cubieColorArray[72];
-        
-        /*for (int i = 0; i < 72; i++) {
-            cubieColorArray[i] = 1.f;
-        }*/
         
         for (int face = 0; face < 6; face++) {
             //have a cubie
@@ -108,21 +71,6 @@ void World::OnRender()  {
                 cubieColorArray[2 + i * 4] = 0;
             }*/
         }
-        
-//        if (cubie % 3 != 1 && (int)(cubie % 9) / 3 != 1 && (int)cubie / 9 != 1) {
-//            
-//            //corner
-//            
-//        }
-//        else if (cubie != 4 && cubie != 10 && cubie != 12 && cubie != 14 && cubie != 16 && cubie != 22) {
-//            
-//            //edge
-//            
-//        }
-//        else    {
-//            //center
-//        }
-        
         
         glPushMatrix();
         

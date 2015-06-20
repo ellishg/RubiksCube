@@ -225,9 +225,12 @@ void Rubiks::solveCube()    {
     }
     
     //Now lets permutate corners
-    
+    t = clock();
     if (!permutateCorners(tmpCubeState, movesStack)) {
         printf("Unable to permutate corners!\n");
+    }
+    else    {
+        printf("Permuted corners! (%f seconds)\n", (float)(clock() - t) / CLOCKS_PER_SEC);
     }
     
     
@@ -260,7 +263,7 @@ void Rubiks::solveCube()    {
         
     }
     else    {
-        printf("Accomplished goal! (%i moves, %f seconds)\n", (int)tmpMovesStack.size(), (float)t / CLOCKS_PER_SEC);
+        printf("Accomplished oriented corners goal! (%i moves, %f seconds)\n", (int)tmpMovesStack.size(), (float)t / CLOCKS_PER_SEC);
         while (!tmpMovesStack.empty()) {
             
             moveRubiksCube(tmpMovesStack.back().face, tmpMovesStack.back().direction, tmpCubeState);
@@ -311,35 +314,38 @@ void Rubiks::solveCube()    {
     }
 
     //Lets clean up our moves!
-    
-    std::list<moveAndDirection> tmpMoves = movesStack;
-    
-    movesStack.clear();
-    
-    int newDirection;
-    
-    while (!tmpMoves.empty())   {
-        
-        moveAndDirection prevMove = tmpMoves.back();
-        tmpMoves.pop_back();
-        
-        if (tmpMoves.back().face == prevMove.face) {
-            newDirection = (prevMove.direction + tmpMoves.back().direction) % 4;
-            if (newDirection == 0) {
-                //useless move
+    //twice just to be sure
+    if (movesStack.size() > 1) {
+        for (int i = 0; i < 2; i++) {
+            std::list<moveAndDirection> tmpMoves = movesStack;
+            
+            movesStack.clear();
+            
+            int newDirection;
+            
+            while (!tmpMoves.empty())   {
+                
+                moveAndDirection prevMove = tmpMoves.back();
                 tmpMoves.pop_back();
-                continue;
-            }
-            else    {
-                prevMove.direction = (RUBIKS_CUBE_MOVE_DIRECTION)newDirection;
-                tmpMoves.pop_back();
+                
+                if (tmpMoves.back().face == prevMove.face) {
+                    newDirection = (prevMove.direction + tmpMoves.back().direction) % 4;
+                    if (newDirection == 0) {
+                        //useless move
+                        tmpMoves.pop_back();
+                        continue;
+                    }
+                    else    {
+                        prevMove.direction = (RUBIKS_CUBE_MOVE_DIRECTION)newDirection;
+                        tmpMoves.pop_back();
+                    }
+                }
+                movesStack.push_front(prevMove);
             }
         }
-        movesStack.push_front(prevMove);
     }
     
     printf("%lu moves in %f seconds!\n", movesStack.size(), (float)(clock() - time) / CLOCKS_PER_SEC);
-    
 }
 
 uint32_t * Rubiks::makeCubeState(const uint8_t * goal)  {
@@ -766,6 +772,7 @@ bool Rubiks::permutateCorners(uint32_t * cState, std::list<moveAndDirection> & m
         
         for (int i = 1; i < 4; i++) {
             //switch the numbers that have the greatest difference!
+            //This is to order a set of 4 numbers mod 4
             int leftDiff = currentPermutation[i] - currentPermutation[(i - 1) % 4];
             int rightDiff = currentPermutation[(i + 1) % 4] - currentPermutation[i];
             
